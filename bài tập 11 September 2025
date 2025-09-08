@@ -1,0 +1,76 @@
+# 1. Tìm số lớn nhất trong ba số
+def max_of_three(a, b, c):
+    return max(a, b, c)
+
+# 2. Tính tổng tất cả các số trong một danh sách
+def sum_list(numbers):
+    return sum(numbers)
+
+# 3. Đảo ngược một chuỗi
+def reverse_string(s):
+    return s[::-1]
+
+# 4. Tính giai thừa của một số (số nguyên không âm)
+def factorial(n):
+    if n < 0:
+        return "Không tồn tại giai thừa cho số âm"
+    if n == 0 or n == 1:
+        return 1
+    fact = 1
+    for i in range(2, n+1):
+        fact *= i
+    return fact
+
+# 5. Kiểm tra một số có phải là số nguyên tố hay không
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5)+1):   # chỉ cần duyệt đến căn bậc 2 của n
+        if n % i == 0:
+            return False
+    return True
+
+# 6.1. In ra tất cả số nguyên tố nhỏ hơn một số nhập từ bàn phím
+def primes_less_than():
+    limit = int(input("Nhập một số: "))
+    primes = []
+    for num in range(2, limit):
+        if is_prime(num):
+            primes.append(num)
+    return primes
+
+# 6.2. In ra N số nguyên tố đầu tiên
+def first_n_primes(n):
+    primes = []
+    num = 2
+    while len(primes) < n:
+        if is_prime(num):
+            primes.append(num)
+        num += 1
+    return primes
+
+# 7. Kiểm tra một số có phải là "số hoàn hảo" hay không
+# (số hoàn hảo là số bằng tổng các ước số dương nhỏ hơn nó, vd: 6 = 1 + 2 + 3)
+def is_perfect(num):
+    divisors = [i for i in range(1, num) if num % i == 0]
+    return sum(divisors) == num
+
+# In ra tất cả số hoàn hảo nhỏ hơn 1000
+def perfect_numbers_less_than_1000():
+    return [n for n in range(1, 1000) if is_perfect(n)]
+
+# 8. Kiểm tra một chuỗi có phải là pangram hay không
+# Pangram: câu chứa đầy đủ 26 chữ cái tiếng Anh ít nhất một lần
+import string
+
+def is_pangram(s):
+    alphabet = set(string.ascii_lowercase)   # tập hợp 26 chữ cái a-z
+    return alphabet <= set(s.lower())        # so sánh xem chuỗi có đủ các chữ cái không
+    print(max_of_three(3, 7, 5))             # Kết quả: 7
+print(sum_list([1, 2, 3, 4, 5]))      
+print(reverse_string("hello"))        
+print(factorial(5))                     
+print(is_prime(29))                      
+print(first_n_primes(10))                
+print(perfect_numbers_less_than_1000())  
+print(is_pangram("The quick brown fox jumps over the lazy dog"))
