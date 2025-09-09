@@ -1,0 +1,158 @@
+# 1.Write python program:
+# a)Convert two lists into a dictionary
+# b)Merge two Python dictionaries into one
+# c)Print the value of key ‘history’ from the below dict
+#    {‘id’:4, ’history’:’sample’, ’price’:73}
+# a)Initialize dictionary with default values
+# b)Create a dictionary by extracting the keys from a given dictionary
+# c)Delete a list of keys from a dictionary
+# # d)Check if a value exists in a dictionary
+# # e)Rename key of a dictionary
+# # f)Get the key of a minimum value from the following dictionary
+# #   {‘a’:4, ’b’:18, ’c’:73}
+from operator import itemgetter
+
+# a)Convert two lists into a dictionary
+keys = {'Lacoste', 'Ralph Lauren','Amway'}
+values= ['apple', 'google','samsung']
+
+dict_from_list = dict(zip(keys, values))
+print(dict_from_list)
+
+# b)Merge two Python dictionaries into one
+dict1= {"a":1,"b":2}
+dict2={"c":3,"d":4}
+dict1.update(dict2)
+
+print('Merge two Python dictionaries into one:',dict1)
+
+# c)Print the value of key ‘history’ from the below dict
+#    {‘id’:4, ’history’:’sample’, ’price’:73}
+my_dict = {'id': 4, 'history': 'sample', 'price': 73}
+print('value of key ‘history:’',my_dict['history'])
+
+#a)Initialize dictionary with default values
+employees = ['Kelly', 'Emma', 'John']
+defaults = {'designation': 'Developer', 'salary': 8000}
+employee_dict= dict.fromkeys(employees, defaults)
+
+print('Initialize dictionary with default values:', employee_dict)
+
+# b)Create a dictionary by extracting the keys from a given dictionary
+sample_dict = {
+    "Service":{
+    "name": "Kelly",
+    "age": 25,
+    "salary": 8000,
+    "city": "New York"
+    },
+    "Bar staff":{
+    "name": "Jonh",
+    "age": 23,
+    "salary": 10000,
+    "city": "Paris"
+    }
+}
+print('Extracted dictionary:',sample_dict["Service"]["age"])
+print('Extracted dictionary:',sample_dict["Bar staff"]["city"])
+
+# c)Delete a list of keys from a dictionary
+# danh sách keys cần xóa
+sample_dict1 = {
+    "name": "Kelly",
+    "age": 25,
+    "salary": 8000,
+    "city": "New York"
+    }
+keys_to_remove = ["name", "salary"]
+
+for key in keys_to_remove:
+        sample_dict1.pop(key, None) # dùng None để tránh lỗi nếu key không tồn tại
+
+print('Delete a list of keys from a dictionary:',sample_dict1)
+
+# d)Check if a value exists in a dictionary
+# Gía trị cần kiểm tra
+check_value= 25
+if check_value in sample_dict1.values():
+    print(f'Value {check_value} exists in dictionary')
+else:
+    print(f'Value {check_value} does not exist in dictionary')
+
+# e)Rename key of a dictionary
+sample_dict1["location"] = sample_dict1.pop("city")
+print('dictionary after rename key:',sample_dict1)
+
+# f)Get the key of a minimum value from the following dictionary
+#   {‘a’:4, ’b’:18, ’c’:73}
+dict3={'a':4, 'b':18, 'c':73}
+min_key = min(dict3, key=dict3.get)
+print("Key of minimum value:", min_key)
+
+# g)Change value of a key in a nested dictionary
+sample_dict = {
+    "Service":{
+    "name": "Kelly",
+    "age": 25,
+    "salary": 8000,
+    "city": "New York"
+    },
+    "Bar staff":{
+    "name": "Jonh",
+    "age": 23,
+    "salary": 10000,
+    "city": "Paris"
+    }
+}
+# Đổi giá trị của key "name" trong "Service"
+sample_dict["Service"]["name"] = "David Beckham"
+# Đổi giá trị của key "age" trong "Bar staff"
+sample_dict[ "Bar staff"]["age"] = 27
+print("Updated nested dictionary:", sample_dict)
+
+# 2.Write a Python program that counts the number of
+# times characters appear in a text paragraph and its appearing positions.
+s = ("Keys views are set-like since their entries are unique and hashable. "
+     "Items views also have set-like "
+     "operations since the (key, value) pairs are unique and the keys are hashable.")
+s = s.lower()  # chuyển chuỗi về chữ thường
+stats = {}  # tạo dict rỗng để lưu kết quả
+pos = 0  # biến đếm vị trí ký tự
+
+for ch in s:  # duyệt từng ký tự trong chuỗi
+    dem = 1
+    if stats.get(ch) is None:  # nếu ký tự chưa có trong dict
+        item = {'count': dem, 'positions': [pos]}  # tạo dict cho ký tự
+        stats[ch] = item  # gán vào stats
+    else:
+        dem = int(stats[ch]['count']) + 1  # tăng số lần xuất hiện
+        poss = list(stats[ch]['positions'])  # lấy danh sách vị trí cũ
+        poss.append(pos)  # thêm vị trí mới
+        stats[ch] = {'count': dem, 'positions': poss}  # cập nhật dict
+
+    pos += 1  # tăng vị trí cho ký tự tiếp theo
+
+# In kết quả
+for key, val in stats.items():
+    print(f"Ký tự '{key}' xuất hiện {val} lần")
+
+# 3.Write a program using a dictionary containing
+# keys starting from 1 and values containing prime numbers less than a value N.
+def is_prime(num):
+    """Hàm kiểm tra số nguyên tố"""
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def prime_dict(N):
+    # Tạo dictionary: key = 1..n, value = prime numbers < N
+    primes = [x for x in range(2, N) if is_prime(x)]
+    return {i+1: primes[i] for i in range(len(primes))}
+
+N = 20
+result = prime_dict(N)
+print(f"Values containing prime numbers less than a value {N}:")
+print(result)
