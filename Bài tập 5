@@ -1,0 +1,68 @@
+# 1) Max and Min in a set
+nums = {12, 45, 7, 89, 34}
+print("Max:", max(nums))
+print("Min:", min(nums))
+# 2) Check if a value exists in a set
+nums = {12, 45, 7, 89, 34}
+val = 45
+if val in nums:
+    print(f"{val} is present in the set.")
+else:
+    print(f"{val} is not present in the set.")
+# 3) Check disjoint sets
+set1 = {1, 2, 3}
+set2 = {4, 5, 6}
+
+if set1.isdisjoint(set2):
+    print("The sets have no elements in common.")
+else:
+    print("The sets have common elements.")
+# 4) Unique words and frequency
+words = ["apple", "banana", "apple", "orange", "banana", "apple"]
+unique_words = set(words)
+
+print("Unique words:", unique_words)
+print("Frequencies:")
+for word in unique_words:
+    print(word, ":", words.count(word))
+# 5) Missing numbers
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7}
+
+print("In set1 but not in set2:", set1 - set2)
+print("In set2 but not in set1:", set2 - set1)
+# Employees dictionary
+employees = {
+    1001: {"name": "Alice", "department": "Engineering", "salary": 75000},
+    1002: {"name": "Bob", "department": "Sales", "salary": 50000},
+    1003: {"name": "Charlie", "department": "Engineering", "salary": 80000},
+    1004: {"name": "Dave", "department": "Marketing", "salary": 60000},
+    1005: {"name": "Eve", "department": "Sales", "salary": 55000}
+}
+
+# Restructure employees by department
+dept_employees = {}
+
+for emp_id, info in employees.items():
+    dept = info["department"]
+    if dept not in dept_employees:
+        dept_employees[dept] = {}
+    dept_employees[dept][emp_id] = {"name": info["name"], "salary": info["salary"]}
+
+{
+ 'Engineering': {
+   1001: {'name': 'Alice', 'salary': 75000},
+   1003: {'name': 'Charlie', 'salary': 80000}
+ },
+ 'Sales': {
+   1002: {'name': 'Bob', 'salary': 50000},
+   1005: {'name': 'Eve', 'salary': 55000}
+ },
+ 'Marketing': {
+   1004: {'name': 'Dave', 'salary': 60000}
+ }
+}
+
+
+
+
