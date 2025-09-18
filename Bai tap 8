@@ -1,0 +1,69 @@
+# 1) ZeroDivisionError handling
+try:
+    a = float(input("Enter numerator: "))
+    b = float(input("Enter denominator: "))
+    result = a / b
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+else:
+    print("Result:", result)
+# 2) Raise ValueError for non-integer input
+user_input = input("Enter an integer: ")
+
+def read_int(text: str) -> int:
+    try:
+        return int(text.strip())
+    except Exception:
+        # Explicitly raise ValueError as requested
+        raise ValueError(f"Invalid integer: {text!r}")
+
+try:
+    n = read_int(user_input)
+    print("You entered integer:", n)
+except ValueError as e:
+    print("ValueError raised:", e)
+# 3) Raise TypeError for non-numeric inputs
+x = input("Enter first number: ")
+y = input("Enter second number: ")
+
+def to_number(s: str) -> float:
+    try:
+        return float(s.strip())
+    except Exception:
+        # Explicit TypeError per requirement
+        raise TypeError(f"Non-numeric input: {s!r}")
+
+try:
+    a = to_number(x)
+    b = to_number(y)
+    print("Sum =", a + b)
+except TypeError as e:
+    print("TypeError raised:", e)
+# 4) IndexError handling for list indexing
+items = ["alpha", "beta", "gamma"]
+
+try:
+    idx = int(input(f"Pick index 0..{len(items)-1}: "))
+    print("You picked:", items[idx])
+except IndexError:
+    print("Error: Index out of range for the list.")
+except ValueError:
+    print("Error: Please enter a valid integer index.")
+# 5) KeyboardInterrupt handling during input
+try:
+    val = float(input("Enter a number (Ctrl+C to cancel): "))
+    print("You typed:", val)
+except KeyboardInterrupt:
+    print("\nInput cancelled by user.")
+except ValueError:
+    print("That's not a valid number.")
+# 6) ArithmeticError handling (catches arithmetic issues incl. ZeroDivisionError)
+try:
+    a = float(input("Enter numerator: "))
+    b = float(input("Enter denominator: "))
+    print("Quotient =", a / b)
+except ArithmeticError as e:
+    # ArithmeticError is a base class (e.g., ZeroDivisionError, OverflowError)
+    print("ArithmeticError caught:", e)
+except ValueError:
+    print("Please enter numeric values.")
